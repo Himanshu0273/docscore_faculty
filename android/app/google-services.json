@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "756532367151",
+    "project_id": "docscore-395b5",
+    "storage_bucket": "docscore-395b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756532367151:android:5e00be28fc4c224df1dbda",
+        "android_client_info": {
+          "package_name": "com.example.docscore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756532367151-imuk4e1satfajs6q1o1gtno1lmds4ar5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_vyNyKZCRjTohBO0-dal__F8hEpBnbIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756532367151-imuk4e1satfajs6q1o1gtno1lmds4ar5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "756532367151-q4g075kr19uik54hajioe9nu1cu4rl3c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.docscore"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756532367151:android:bffbb006db0c65d2f1dbda",
+        "android_client_info": {
+          "package_name": "com.example.docscore_faculty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756532367151-imuk4e1satfajs6q1o1gtno1lmds4ar5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_vyNyKZCRjTohBO0-dal__F8hEpBnbIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756532367151-imuk4e1satfajs6q1o1gtno1lmds4ar5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "756532367151-q4g075kr19uik54hajioe9nu1cu4rl3c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.docscore"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
