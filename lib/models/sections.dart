@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:docscore_faculty/models/student.dart' as studentModel;
+import 'package:docscore_faculty/models/faculty.dart' as facultyUsersModel;
 
 class Section {
   static Future<List<String>> getSections() async {
@@ -58,4 +59,17 @@ class Section {
       return null;
     }
   }
+
+  static Future addFacultyInSections(String eMail, List<String> sections) async{
+    String uid = "";
+    for(int i = 0; i< eMail.length;i++){
+      if(eMail[i]=="@") break;
+      uid += eMail[i];
+    }
+    facultyUsersModel.FacultySections faculty = facultyUsersModel.FacultySections(name: uid, students: ["RA2111051010002"]);
+    for(int i=0;i<sections.length;i++){
+      await FirebaseFirestore.instance.collection("sections").doc(sections[i]).collection("Faculty advisors").doc(uid).set(faculty.toJson());
+    }
+  }
 }
+

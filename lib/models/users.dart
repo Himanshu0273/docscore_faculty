@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:docscore_faculty/models/student.dart' as student_model;
 import 'package:docscore_faculty/models/faculty.dart' as faculty_model;
+import 'package:firebase_core/firebase_core.dart';
 
 class User {
   // FUNCTIONS TO UPDATE OR ADD INTO DATABASE
@@ -31,16 +32,25 @@ class User {
 
   // add Faculty in user collection
   static Future addFaculty(
-      String uid, String facultyName, List<String> sections) async {
+      String eMail, String facultyName, List<String> sections) async {
     faculty_model.Faculty faculty = faculty_model.Faculty(
       name: facultyName,
       sections: sections,
     );
-
+    String uid = "";
+    for(int i = 0; i< eMail.length;i++){
+      if(eMail[i]=="@") break;
+      uid += eMail[i];
+    }
     await FirebaseFirestore.instance.collection("users").doc(uid).set(
           faculty.toJson(),
         );
   }
+
+  // Future addFacultyDetails(String eMail, List classes) async {
+    
+  //   await FirebaseFirestore.instance.collection("users").doc(uid)
+  // }
 
   // FUNCTIONS TO GET FROM DATABASE
   static Future<bool> alreadyExists(String id) async {

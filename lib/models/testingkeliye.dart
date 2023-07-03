@@ -2,6 +2,7 @@ import 'package:docscore_faculty/models/sections.dart';
 import 'package:flutter/material.dart';
 import 'package:docscore_faculty/models/users.dart';
 
+
 class TestingKeLiye extends StatelessWidget {
   const TestingKeLiye({super.key});
 
@@ -13,8 +14,7 @@ class TestingKeLiye extends StatelessWidget {
       ),
       body: ElevatedButton(
         onPressed: () async {
-          var some = await User.addFaculty("001", "Chinnasamy", ["AB2", "AB1"]);
-          print(some);
+          Section.addFacultyInSections("chinna@srm", ["R1","R2"]);
         },
         child: Text("DABAO"),
       ),
