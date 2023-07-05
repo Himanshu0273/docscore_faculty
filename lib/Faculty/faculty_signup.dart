@@ -45,6 +45,23 @@ class _FacultySignupPageState extends State<FacultySignupPage> {
     }
   }
 
+  List<String> _selectedItems = [];
+  void showMultiSelect() async {
+    final List<String> sections = ["AB1", "AB2", "R1", "R2", "X1", "Z1"];
+
+    final List<String>? results = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return MultiSelect(items: sections);
+      },
+    );
+    if (results != null) {
+      setState(() {
+        _selectedItems = results;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +87,7 @@ class _FacultySignupPageState extends State<FacultySignupPage> {
                   // SVG image
 
                   SvgPicture.asset(
-                    'assets/srm-logo.svg',
+                    'assets/srmist.svg',
                     height: 70,
                   ),
 
@@ -88,6 +105,15 @@ class _FacultySignupPageState extends State<FacultySignupPage> {
                       hintText: 'SRM Email',
                       textInputType: TextInputType.emailAddress,
                     ),
+                  ),
+
+                  const SizedBox(
+                    height: 32,
+                  ),
+
+                  ElevatedButton(
+                    onPressed: showMultiSelect,
+                    child: const Text("Select Your Class"),
                   ),
 
                   const SizedBox(
