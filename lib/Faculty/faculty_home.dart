@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class faculty_homepage extends StatelessWidget {
   const faculty_homepage({super.key});
 
+  //Faculty Homepage
   @override
   Widget build(BuildContext context) {
     return Scaffold(
