@@ -1,4 +1,6 @@
 import 'package:docscore_faculty/Faculty/faculty_signup.dart';
+import 'package:docscore_faculty/Faculty/faculty_view_documents.dart';
+import 'package:docscore_faculty/Faculty/faculty_view_students.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:docscore_faculty/Faculty/faculty_home.dart';
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const faculty_homepage(),
+      home: ViewDocuments()
       // home: StreamBuilder(
       //   stream: AuthMethods().auth.authStateChanges(),
       //   builder: (context, snapshot) {

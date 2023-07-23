@@ -66,3 +66,28 @@ class _MultiSelectState extends State<MultiSelect> {
     );
   }
 }
+
+class StudentTile extends StatelessWidget {
+  const StudentTile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 35,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text("Debargha Das"),
+          Text("RA2111051010002"),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.arrow_forward),
+          )
+        ],
+      ),
+    );
+  }
+}
