@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../resources/constants/colors.dart';
 
 class faculty_homepage extends StatelessWidget {
   const faculty_homepage({super.key});
@@ -13,17 +14,7 @@ class faculty_homepage extends StatelessWidget {
           child: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Color(0xFF1F2C45),
-                  Color(0xFF274B93),
-                  Color(0XFF2A519D),
-                ],
-              ),
-            ),
+            decoration: BoxDecoration(gradient: backgroundGradient()),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
