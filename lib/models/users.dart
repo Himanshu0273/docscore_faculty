@@ -31,7 +31,7 @@ class User {
   }
 
   // add Faculty in user collection
-  static Future addFaculty(
+  static Future addFacultyToUsers(
       String eMail, String facultyName, List<String> sections) async {
     faculty_model.Faculty faculty = faculty_model.Faculty(
       name: facultyName,

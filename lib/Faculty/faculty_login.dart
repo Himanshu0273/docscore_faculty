@@ -1,5 +1,7 @@
 // ignore_for_file: unused_field, sort_child_properties_last
 
+import 'package:docscore_faculty/Faculty/faculty_signup.dart';
+import 'package:docscore_faculty/resources/constants.dart';
 import 'package:docscore_faculty/resources/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -71,7 +73,7 @@ class _FacultyLoginScreenState extends State<FacultyLoginScreen> {
                   // SVG image
 
                   SvgPicture.asset(
-                    'assets/srm-logo.svg',
+                    'assets/srmist.svg',
                     height: 70,
                   ),
 
@@ -132,6 +134,16 @@ class _FacultyLoginScreenState extends State<FacultyLoginScreen> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 20),
+                  TextButton(
+                    onPressed: () {
+                      nextScreen(context, FacultySignupPage());
+                    },
+                    child: Text(
+                      "Don't have an account? Sign up here.",
+                      style: TextStyle(color: Colors.grey[300]),
+                    ),
+                  )
                 ],
               ),
             ),

@@ -1,5 +1,6 @@
-import 'package:docscore_faculty/Faculty/docsuploaded.dart';
+import 'package:docscore_faculty/Faculty/faculty_login.dart';
 import 'package:docscore_faculty/Faculty/faculty_signup.dart';
+import 'package:docscore_faculty/resources/auth/auth_method.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:docscore_faculty/Faculty/faculty_home.dart';
@@ -22,16 +23,15 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: docs_uploaded(),
-      // home: StreamBuilder(
-      //   stream: AuthMethods().auth.authStateChanges(),
-      //   builder: (context, snapshot) {
-      //     if (snapshot.hasData) {
-      //       return const Student_home_page();
-      //     }
-      //     return StudentSignup();
-      //   },
-      // ),
+      home: StreamBuilder(
+        stream: AuthMethods().auth.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return faculty_homepage();
+          }
+          return FacultyLoginScreen();
+        },
+      ),
     );
   }
 }
