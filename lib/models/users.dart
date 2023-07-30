@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 class User {
   // FUNCTIONS TO UPDATE OR ADD INTO DATABASE
 
+
   // add student in user collection with nill documents uploaded
   static Future addStudent(String regno, String studentName) async {
     String res = "Error";
@@ -38,8 +39,8 @@ class User {
       sections: sections,
     );
     String uid = "";
-    for(int i = 0; i< eMail.length;i++){
-      if(eMail[i]=="@") break;
+    for (int i = 0; i < eMail.length; i++) {
+      if (eMail[i] == "@") break;
       uid += eMail[i];
     }
     await FirebaseFirestore.instance.collection("users").doc(uid).set(
@@ -48,7 +49,7 @@ class User {
   }
 
   // Future addFacultyDetails(String eMail, List classes) async {
-    
+
   //   await FirebaseFirestore.instance.collection("users").doc(uid)
   // }
 
@@ -58,4 +59,13 @@ class User {
         await FirebaseFirestore.instance.collection("users").doc(id).get();
     return documentSnapshot.exists;
   }
+
+  static Future<String> getFacultyName() async {
+    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+        .collection("users")
+        .doc("chinna")
+        .get();
+    return documentSnapshot["name"].toString();
+  }
+
 }

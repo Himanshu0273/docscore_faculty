@@ -1,5 +1,6 @@
 import 'package:docscore_faculty/Faculty/faculty_login.dart';
 import 'package:docscore_faculty/Faculty/faculty_signup.dart';
+import 'package:docscore_faculty/models/testingkeliye.dart';
 import 'package:docscore_faculty/resources/auth/auth_method.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: StreamBuilder(
+      home: 
+      StreamBuilder(
         stream: AuthMethods().auth.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {

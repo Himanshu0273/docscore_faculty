@@ -1,9 +1,12 @@
+import 'package:docscore_faculty/Faculty/faculty_proifle.dart';
+import 'package:docscore_faculty/resources/constants.dart';
+import 'package:docscore_faculty/widgets/faculty_home_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../resources/constants/colors.dart';
 
 class faculty_homepage extends StatelessWidget {
-  const faculty_homepage({super.key});
+  faculty_homepage({super.key});
 
   //Faculty Homepage
   @override
@@ -28,14 +31,21 @@ class faculty_homepage extends StatelessWidget {
                     padding: const EdgeInsets.all(12.0),
                     child: Row(
                       children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.menu,
-                            color: Color(0xffD9D9D9),
-                            size: 30,
+                        CircleAvatar(
+                          backgroundColor: Colors.grey[300],
+                          maxRadius: 23,
+                          child: IconButton(
+                            onPressed: () {
+                              nextScreen(context, FacultyProfile());
+                            },
+                            icon: const Icon(
+                              Icons.person,
+                              color: Colors.black,
+                              size: 30,
+                            ),
                           ),
                         ),
+                        const SizedBox(width: 15),
                         Text(
                           'Home',
                           style: GoogleFonts.montserrat(
@@ -56,206 +66,27 @@ class faculty_homepage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Profile Photo
-                  Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 25.0),
-                        child: Image.asset(
-                          'assets/download.jpg',
-                          height: 150,
-                          width: 150,
-                        ),
-                      ),
-                      Container(
-                        width: 2, // Adjust the width of the line as needed
-                        height: 150, // Adjust the height of the line as needed
-                        color: const Color(0xffD9D9D9),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              "Name : ",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            Text(
-                              "Faculty ID: ",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            Text(
-                              "Year : ",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Divider(
-                    height: 0.5,
-                    thickness: 1,
-                    color: Color(0xffD9D9D9),
-                  ),
-                  const SizedBox(
-                    height: 25,
-                  ),
 
-                  //Section Heading Box
-                  Container(
-                    height: 50,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: const Color(0xffD9D9D9),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "Sections",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
+                  const Heading(heading: "Sections"),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: GridView.builder(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                        
+                        ),
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          return const HomeTile(
+                            sectionName: "AB2",
+                            numberOfStudents: "53",
+                          );
+                        },
                       ),
-                    ),
-                  ),
-
-                  //Section Selection Buttons
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        //Headings
-                        const Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 10.0),
-                              child: Text(
-                                "Section",
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                            ),
-                            Spacer(),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 10.0),
-                              child: Text(
-                                "Course",
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                            ),
-                            Spacer(),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 10.0),
-                              child: Text(
-                                "Students ",
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        ),
-                        //Section 1
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/faculty_section1');
-                            },
-                            child: const Row(
-                              children: [
-                                Text('AB-2'),
-                                Spacer(),
-                                Text('B.Tech CSE with GT'),
-                                Spacer(),
-                                Text('52'),
-                                SizedBox(
-                                  width: 2.5,
-                                ),
-                                Icon(Icons.arrow_forward_ios_rounded),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-
-                        //Section 2
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/faculty_section1');
-                            },
-                            child: const Row(
-                              children: [
-                                Text('AB-2'),
-                                Spacer(),
-                                Text('B.Tech CSE with GT'),
-                                Spacer(),
-                                Text('52'),
-                                SizedBox(
-                                  width: 2.5,
-                                ),
-                                Icon(Icons.arrow_forward_ios_rounded),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-
-                        //Section 3
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/faculty_section1');
-                            },
-                            child: const Row(
-                              children: [
-                                Text('AB-2'),
-                                Spacer(),
-                                Text('B.Tech CSE with GT'),
-                                Spacer(),
-                                Text('52'),
-                                SizedBox(
-                                  width: 2.5,
-                                ),
-                                Icon(Icons.arrow_forward_ios_rounded),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
                   ),
                 ],
