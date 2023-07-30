@@ -1,4 +1,3 @@
-import 'package:docscore_faculty/Faculty/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -139,8 +138,8 @@ class ViewStudents extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: 6,
                       itemBuilder: (BuildContext context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(
                               vertical: 12, horizontal: 18),
                           // child: StudentTile(),
                         );
