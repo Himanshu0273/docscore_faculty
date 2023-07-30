@@ -14,7 +14,7 @@ class TestingKeLiye extends StatelessWidget {
       ),
       body: ElevatedButton(
         onPressed: () async {
-          Section.addFacultyInSections("chinna@srm", ["R1","R2"]);
+          print(User.getFacultyName());
         },
         child: Text("DABAO"),
       ),

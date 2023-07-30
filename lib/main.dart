@@ -1,5 +1,10 @@
+import 'package:docscore_faculty/Faculty/docsuploaded.dart';
 import 'package:docscore_faculty/Faculty/faculty_login.dart';
+import 'package:docscore_faculty/Faculty/faculty_proifle.dart';
 import 'package:docscore_faculty/Faculty/faculty_signup.dart';
+import 'package:docscore_faculty/Faculty/faculty_view_documents.dart';
+import 'package:docscore_faculty/Faculty/faculty_view_students.dart';
+import 'package:docscore_faculty/models/testingkeliye.dart';
 import 'package:docscore_faculty/resources/auth/auth_method.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
