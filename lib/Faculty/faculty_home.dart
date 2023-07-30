@@ -36,7 +36,10 @@ class faculty_homepage extends StatelessWidget {
                           maxRadius: 23,
                           child: IconButton(
                             onPressed: () {
-                              nextScreen(context, FacultyProfile());
+                              nextScreen(
+                                context,
+                                const Facultyprofile(),
+                              );
                             },
                             icon: const Icon(
                               Icons.person,
@@ -73,11 +76,11 @@ class faculty_homepage extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(15),
                       child: GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
-                        
                         ),
                         itemCount: 3,
                         itemBuilder: (context, index) {
