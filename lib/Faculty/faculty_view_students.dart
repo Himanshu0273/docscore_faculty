@@ -1,10 +1,7 @@
-<<<<<<< HEAD
-=======
 import 'package:docscore_faculty/resources/constants/colors.dart';
 import 'package:docscore_faculty/widgets/faculty_appbar.dart';
 import 'package:docscore_faculty/widgets/faculty_home_widgets.dart';
 import 'package:docscore_faculty/widgets/faculty_view_students.dart';
->>>>>>> 79e7034d7f3a70f6088f3a83e39708c5ebb7eb65
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -43,7 +40,6 @@ class ViewStudents extends StatelessWidget {
                       )
                     ],
                   ),
-<<<<<<< HEAD
                   const Padding(
                     padding: EdgeInsets.only(left: 15, right: 15),
                     child: Divider(
@@ -72,24 +68,27 @@ class ViewStudents extends StatelessWidget {
                           // child: StudentTile(),
                         );
                       },
-=======
-                  SingleChildScrollView(
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.7,
-                      child: ListView.builder(
-                        itemCount: 19,
-                        shrinkWrap: true,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return StudentTile(
-                            name: "Debargha",
-                            docsUploaded: 2,
-                          );
-                        },
-                      ),
->>>>>>> 79e7034d7f3a70f6088f3a83e39708c5ebb7eb65
+
+                      //   SingleChildScrollView(
+                      //     child: SizedBox(
+                      //       height: MediaQuery.of(context).size.height * 0.7,
+                      //       child: ListView.builder(
+                      //         itemCount: 19,
+                      //         shrinkWrap: true,
+                      //         physics: const BouncingScrollPhysics(),
+                      //         itemBuilder: (context, index) {
+                      //           return StudentTile(
+                      //             name: "Debargha",
+                      //             docsUploaded: 2,
+                      //           );
+                      //         },
+                      //       ),
+
+                      //     ),
+                      //   )
+                      // ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
