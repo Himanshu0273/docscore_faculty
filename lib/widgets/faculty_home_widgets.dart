@@ -56,7 +56,7 @@ class Heading extends StatelessWidget {
             heading,
             style: GoogleFonts.montserrat(
               fontSize: 25,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.bold,
               color: Colors.white,
               decoration: TextDecoration.underline,
               decorationStyle: TextDecorationStyle.solid,
