@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:docscore_faculty/Faculty/docsuploaded.dart';
 import 'package:docscore_faculty/models/student.dart' as student_model;
 import 'package:docscore_faculty/models/faculty.dart' as faculty_model;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class User {
   // FUNCTIONS TO UPDATE OR ADD INTO DATABASE
-
 
   // add student in user collection with nill documents uploaded
   static Future addStudent(String regno, String studentName) async {
@@ -60,12 +61,148 @@ class User {
     return documentSnapshot.exists;
   }
 
-  static Future<String> getFacultyName() async {
-    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-        .collection("users")
-        .doc("chinna")
-        .get();
+  static Future<String> getFacultyName(String uid) async {
+    DocumentSnapshot documentSnapshot =
+        await FirebaseFirestore.instance.collection("users").doc(uid).get();
     return documentSnapshot["name"].toString();
   }
 
+  Future<List<String>> getSectionStudentList(String section) async {
+    List<String> studentList = [];
+    QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore
+        .instance
+        .collection("users")
+        .where("section", isEqualTo: section)
+        .get();
+
+    querySnapshot.docs.forEach((doc) {
+      studentList.add(doc.id);
+    });
+
+    return Future.value(studentList);
+  }
+
+  Future<List<String>> getFacultySectionList(String uid) async {
+    List<String> sectionList = [];
+    DocumentSnapshot facultySectionSnapshot =
+        await FirebaseFirestore.instance.collection("users").doc(uid).get();
+
+    for (String section in facultySectionSnapshot["sections"]) {
+      sectionList.add(section);
+    }
+
+    return sectionList;
+  }
+
+  Future<Map<String, dynamic>> getFacultySectionData(
+    String uid,
+  ) async {
+    Map<String, dynamic> facultyHomePageData = {};
+    DocumentSnapshot facultyUsersSnapshot =
+        await FirebaseFirestore.instance.collection("users").doc(uid).get();
+    for (String section in facultyUsersSnapshot["sections"]) {
+      // print(section);
+      DocumentSnapshot sectionsSnapshot = await FirebaseFirestore.instance
+          .collection("sections")
+          .doc(section)
+          .collection("Faculty advisors")
+          .doc(uid)
+          .get();
+      var data = sectionsSnapshot.data();
+      Map<String, dynamic> facData = data as Map<String, dynamic>;
+      // print(facData);
+      facultyHomePageData[section] = {
+        "Students": facData["Students"],
+        "strength": facData["Students"].length
+      };
+    }
+
+    // print(facultyHomePageData);
+
+    return facultyHomePageData;
+  }
+
+  Future<String> getStudentNameFromRegNo(String regno) async {
+    DocumentSnapshot<Map<String, dynamic>> querySnapshot =
+        await FirebaseFirestore.instance.collection("users").doc(regno).get();
+    Map<String, dynamic>? data = querySnapshot.data();
+    return data!["name"];
+  }
+
+  Future<Map?> getStudentDocumentList(String regNo) async {
+    DocumentSnapshot docSnapshot =
+        await FirebaseFirestore.instance.collection("users").doc(regNo).get();
+    if (docSnapshot.exists) {
+      return docSnapshot["documents"];
+    } else {
+      return null;
+    }
+  }
+
+  Future<Map<String, dynamic>> getSectionData(
+      String section, String uid) async {
+    Map<String, dynamic> sectionData = {};
+
+    DocumentSnapshot<Map<String, dynamic>> sectionStudentDataSnapshot =
+        await FirebaseFirestore.instance
+            .collection("sections")
+            .doc(section)
+            .collection("Faculty advisors")
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .get();
+
+    var data = sectionStudentDataSnapshot["Students"];
+
+    List<String> studentRegnoList = [];
+    for (String regno in data) {
+      studentRegnoList.add(regno);
+    }
+
+    for (String regno in studentRegnoList) {
+      DocumentSnapshot<Map<String, dynamic>> studentDataSnapshot =
+          await FirebaseFirestore.instance.collection("users").doc(regno).get();
+
+      var data = studentDataSnapshot.data()!;
+      // print(data);
+
+      Map<String, dynamic> studentData = data;
+      // print(studentData);
+
+      String name = studentData["name"];
+      // print(name);
+      // print(studentData["documents"].keys);
+      List<String> documents = studentData["documents"].keys.toList();
+      // print(documents);
+      int docsUploaded = documents.length;
+
+      sectionData[regno] = {
+        "name": name,
+        "documents": documents,
+        "docsUploaded": docsUploaded,
+      };
+    }
+
+    return sectionData;
+  }
+
+  Future<Map<String, dynamic>> getDocsData(
+      String regno, List<String> docs) async {
+    Map<String, dynamic> docsData = {};
+
+    DocumentSnapshot<Map<String, dynamic>> docsSnapshot =
+        await FirebaseFirestore.instance.collection("users").doc(regno).get();
+
+    for (String docName in docs) {
+      var data = docsSnapshot["documents"][docName];
+
+      docsData[docName] = {
+        "verification": data[0],
+        "url": data[1],
+      };
+    }
+
+    // print(docsData);
+
+    return docsData;
+  }
 }

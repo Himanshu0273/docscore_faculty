@@ -1,5 +1,6 @@
 // ignore_for_file: unused_field, sort_child_properties_last
 
+import 'package:docscore_faculty/Faculty/faculty_home.dart';
 import 'package:docscore_faculty/Faculty/faculty_signup.dart';
 import 'package:docscore_faculty/resources/constants.dart';
 import 'package:docscore_faculty/resources/constants/colors.dart';
@@ -42,7 +43,7 @@ class _FacultyLoginScreenState extends State<FacultyLoginScreen> {
       _isLoading = false;
     });
     if (res == "Success") {
-      showSnackBar("Login success", context);
+      replaceScreen(context, faculty_homepage());
     } else if (res == "empty-fields") {
       showSnackBar("Please enter all the fields", context);
     }
@@ -60,93 +61,102 @@ class _FacultyLoginScreenState extends State<FacultyLoginScreen> {
               gradient: backgroundGradient(),
             ),
             child: Padding(
-              padding: const EdgeInsets.only(
-                top: 10,
-                left: 12,
-                right: 12,
-                bottom: 10,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // SVG image
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  left: 12,
+                  right: 12,
+                  bottom: 10,
+                ),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // SVG image
 
-                  SvgPicture.asset(
-                    'assets/srmist.svg',
-                    height: 70,
-                  ),
+                      Image.asset(
+                        'assets/SRM_1.jpg',
+                        height: 70,
+                      ),
 
-                  const SizedBox(
-                    height: 64,
-                  ),
+                      const SizedBox(
+                        height: 64,
+                      ),
 
-                  // Email input
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    child: TextInput(
-                      textEditingController: _emailController,
-                      hintText: 'SRM Email',
-                      textInputType: TextInputType.emailAddress,
-                    ),
-                  ),
+                      // Email input
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                        ),
+                        child: TextInput(
+                          textEditingController: _emailController,
+                          hintText: 'SRM Email',
+                          textInputType: TextInputType.emailAddress,
+                        ),
+                      ),
 
-                  const SizedBox(
-                    height: 32,
-                  ),
+                      const SizedBox(
+                        height: 32,
+                      ),
 
-                  //Password input
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextInput(
-                      textEditingController: _passwordController,
-                      hintText: 'Password',
-                      textInputType: TextInputType.text,
-                      isPass: true,
-                    ),
-                  ),
+                      //Password input
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: TextInput(
+                          textEditingController: _passwordController,
+                          hintText: 'Password',
+                          textInputType: TextInputType.text,
+                          isPass: true,
+                        ),
+                      ),
 
-                  const SizedBox(
-                    height: 32,
-                  ),
+                      const SizedBox(
+                        height: 32,
+                      ),
 
-                  // Login button
-                  InkWell(
-                    onTap: _loginFaculty,
-                    child: Container(
-                      child: _isLoading
-                          ? const Center(
-                              child: CircularProgressIndicator.adaptive(),
-                            )
-                          : const Text("Login"),
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      decoration: const ShapeDecoration(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
+                      // Login button
+                      InkWell(
+                        onTap: _loginFaculty,
+                        child: Container(
+                          child: _isLoading
+                              ? const Center(
+                                  child: CircularProgressIndicator.adaptive(),
+                                )
+                              : const Text("Login"),
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          decoration: const ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                            color: primaryColor,
                           ),
                         ),
-                        color: primaryColor,
                       ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  TextButton(
-                    onPressed: () {
-                      nextScreen(context, FacultySignupPage());
-                    },
-                    child: Text(
-                      "Don't have an account? Sign up here.",
-                      style: TextStyle(color: Colors.grey[300]),
-                    ),
-                  )
-                ],
-              ),
-            ),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Don't have an account? ",
+                            style: TextStyle(color: Colors.grey[300]),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              nextScreen(context, FacultySignupPage());
+                            },
+                            child: const Text(
+                              "Signup",
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ])),
           ),
         ),
       ),

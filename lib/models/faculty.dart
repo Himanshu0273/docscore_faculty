@@ -14,20 +14,15 @@ class Faculty {
         "role": role,
         "sections": sections,
       };
-
-  
 }
 
-class FacultySections{
+class FacultySections {
   final List<String> students;
   final String name;
 
-  const FacultySections({
-    required this.students,
-    required this.name
-  });
+  const FacultySections({required this.students, required this.name});
   Map<String, dynamic> toJson() => {
         "name": name,
-        "students":[],
+        "Students": students,
       };
 }

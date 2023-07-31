@@ -5,25 +5,55 @@ import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:docscore_faculty/models/users.dart';
 import 'package:docscore_faculty/models/faculty.dart' as faculty_model;
+import 'package:docscore_faculty/models/users.dart' as user_model;
 
-class AuthMethods{
+class AuthMethods {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  static Future addFacultyToUsers(
-      String eMail, String facultyName, List<String> sections) async {
+  static Future addFacultyToUsers(String authUid, String eMail,
+      String facultyName, List<String> sections) async {
     faculty_model.Faculty faculty = faculty_model.Faculty(
       name: facultyName,
       sections: sections,
     );
-    String uid = "";
-    for(int i = 0; i< eMail.length;i++){
-      if(eMail[i]=="@") break;
-      uid += eMail[i];
-    }
-    await FirebaseFirestore.instance.collection("users").doc(uid).set(
+    await FirebaseFirestore.instance.collection("users").doc(authUid).set(
           faculty.toJson(),
         );
+  }
+
+  Future addFacultytoSections(
+      String uid, List<String> students, List<String> sections) async {
+    String res = "Error";
+    try {
+      String name = await user_model.User.getFacultyName(uid).then((value) {
+        String name = value;
+        return name;
+      });
+      for (String section in sections) {
+        print(name);
+        print(section);
+        print(uid);
+        print(students);
+
+        faculty_model.FacultySections facultySec =
+            faculty_model.FacultySections(name: name, students: students);
+
+        await firestore
+            .collection("sections")
+            .doc(section)
+            .collection("Faculty advisors")
+            .doc(uid)
+            .set(
+              facultySec.toJson(),
+            );
+      }
+      res = "Success";
+    } catch (e) {
+      res = e.toString();
+    }
+
+    return res;
   }
 
   // Signup Faculty not completed do not use
@@ -31,7 +61,7 @@ class AuthMethods{
     required String email,
     required String password,
     required List<String> sections,
-    required String name
+    required String name,
   }) async {
     String res = "Some error occured";
     try {
@@ -41,7 +71,17 @@ class AuthMethods{
           email: email,
           password: password,
         );
-        await addFacultyToUsers(email, name, sections);
+        await addFacultyToUsers(
+            userCredential.user!.uid.toString(), email, name, sections);
+
+        List<String> students = [];
+        for (var section in sections) {
+          students = await user_model.User().getSectionStudentList(section);
+        }
+        print("adding");
+        await addFacultytoSections(
+            userCredential.user!.uid, students, sections);
+
         res = "Success";
       }
     } on FirebaseAuthException catch (e) {

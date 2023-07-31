@@ -2,7 +2,6 @@ import 'package:docscore_faculty/models/sections.dart';
 import 'package:flutter/material.dart';
 import 'package:docscore_faculty/models/users.dart';
 
-
 class TestingKeLiye extends StatelessWidget {
   const TestingKeLiye({super.key});
 
@@ -14,7 +13,7 @@ class TestingKeLiye extends StatelessWidget {
       ),
       body: ElevatedButton(
         onPressed: () async {
-          print(User.getFacultyName());
+          // print(User.getFacultyName());
         },
         child: Text("DABAO"),
       ),

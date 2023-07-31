@@ -1,3 +1,5 @@
+import 'package:docscore_faculty/Faculty/faculty_view_students.dart';
+import 'package:docscore_faculty/resources/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,32 +11,41 @@ class HomeTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            sectionName,
-            style: GoogleFonts.montserrat(
-                fontSize: 30, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            numberOfStudents,
-            style: GoogleFonts.montserrat(
-                fontSize: 25, fontWeight: FontWeight.w400),
-          ),
-          Text(
-            "Students",
-            style: GoogleFonts.montserrat(
-                fontSize: 20, fontWeight: FontWeight.w400),
-          )
-        ],
+    return GestureDetector(
+      onTap: () {
+        nextScreen(
+            context,
+            ViewStudents(
+              section: sectionName,
+            ));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              sectionName,
+              style: GoogleFonts.montserrat(
+                  fontSize: 30, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              numberOfStudents,
+              style: GoogleFonts.montserrat(
+                  fontSize: 25, fontWeight: FontWeight.w400),
+            ),
+            Text(
+              "Students",
+              style: GoogleFonts.montserrat(
+                  fontSize: 20, fontWeight: FontWeight.w400),
+            )
+          ],
+        ),
       ),
     );
   }

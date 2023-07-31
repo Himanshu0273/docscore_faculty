@@ -4,11 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StudentTile extends StatelessWidget {
-  const StudentTile(
-      {super.key, required this.name, required this.docsUploaded});
+  const StudentTile({
+    super.key,
+    required this.name,
+    required this.docsUploaded,
+    required this.docs,
+    required this.regno,
+  });
 
   final String name;
   final int docsUploaded;
+  final List<String> docs;
+  final String regno;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +42,12 @@ class StudentTile extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.arrow_forward_ios_sharp),
               onPressed: () {
-                nextScreen(context, ViewDocuments());
+                nextScreen(
+                    context,
+                    ViewDocuments(
+                      documents: docs,
+                      studentRegno: regno,
+                    ));
               },
             )
           ],

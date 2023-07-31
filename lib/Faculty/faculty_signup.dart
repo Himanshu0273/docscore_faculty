@@ -1,11 +1,16 @@
-// ignore_for_file: unused_field, sort_child_properties_last, unused_import
+// ignore_for_file: unused_field, sort_child_properties_last, unused_import, use_build_context_synchronously
 
+import 'package:docscore_faculty/Faculty/faculty_login.dart';
+import 'package:docscore_faculty/resources/constants.dart';
 import 'package:docscore_faculty/resources/constants/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:docscore_faculty/widgets/text_input.dart';
 import 'package:docscore_faculty/resources/auth/auth_method.dart';
 import 'package:docscore_faculty/Faculty/utils/utils.dart';
+import 'package:docscore_faculty/models/sections.dart' as section_model;
 
 class FacultySignupPage extends StatefulWidget {
   const FacultySignupPage({super.key});
@@ -21,6 +26,7 @@ class _FacultySignupPageState extends State<FacultySignupPage> {
   final _nameController = TextEditingController();
   List<String> _selectedItems = [];
   bool _isLoading = false;
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void dispose() {
@@ -49,6 +55,7 @@ class _FacultySignupPageState extends State<FacultySignupPage> {
     });
 
     if (res == "Success") {
+      // print(res1);
       showSnackBar("Signup Success", context);
     } else {
       showSnackBar("Signup Failed", context);
@@ -56,7 +63,7 @@ class _FacultySignupPageState extends State<FacultySignupPage> {
   }
 
   void showMultiSelect() async {
-    final List<String> sections = ["AB1", "AB2", "R1", "R2", "X1", "Z1"];
+    final List<String> sections = await section_model.Section.getSections();
 
     final List<String>? results = await showDialog(
       context: context,
@@ -96,8 +103,8 @@ class _FacultySignupPageState extends State<FacultySignupPage> {
                 children: [
                   // SVG image
 
-                  SvgPicture.asset(
-                    'assets/srmist.svg',
+                  Image.asset(
+                    'assets/SRM_1.jpg',
                     height: 70,
                   ),
 
@@ -192,6 +199,36 @@ class _FacultySignupPageState extends State<FacultySignupPage> {
                         color: primaryColor,
                       ),
                     ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8,
+                        ),
+                        child: Text("Don't have an account? ",
+                            style: TextStyle(color: Colors.grey[300])),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          nextScreen(context, FacultyLoginScreen());
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                          ),
+                          child: const Text(
+                            " Login",
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

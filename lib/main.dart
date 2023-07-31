@@ -31,8 +31,10 @@ class MyApp extends StatelessWidget {
       home: StreamBuilder(
         stream: AuthMethods().auth.authStateChanges(),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return faculty_homepage();
+          if (snapshot.connectionState == ConnectionState.active) {
+            if (snapshot.hasData) {
+              return faculty_homepage();
+            }
           }
           return FacultyLoginScreen();
         },
