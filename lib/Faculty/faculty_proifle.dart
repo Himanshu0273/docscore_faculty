@@ -44,6 +44,7 @@ class _FacultyprofileState extends State<Facultyprofile> {
               );
             } else {
               Map<String, dynamic> data = snapshot.data!;
+              print(data);
 
               return SingleChildScrollView(
                 child: Stack(
@@ -165,7 +166,7 @@ class _FacultyprofileState extends State<Facultyprofile> {
                                           ),
                                           const SizedBox(height: 20),
                                           Text(
-                                            "E-Mail:   ${data["email"].toString()}",
+                                            "E-Mail:   ${data["mail"].toString()}",
                                             style: TextStyle(
                                                 fontSize: 20 *
                                                     MediaQuery.of(context)

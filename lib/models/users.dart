@@ -200,6 +200,7 @@ class User {
         "url": data[1],
       };
 
+      docsData["regno"] = regno;
       docsData["name"] = docsSnapshot["name"];
       docsData["section"] = docsSnapshot["section"];
     }
@@ -217,9 +218,22 @@ class User {
 
     data["name"] = facultyDataSnapshot["name"];
     data["sections"] = facultyDataSnapshot["sections"];
+    data["mail"] = _auth.currentUser!.email.toString();
 
     // print(data);
 
     return data;
+  }
+
+  void updateStudentDocVerification(
+      String regno, String docName, int verification, String url) async {
+    var documents = await getStudentDocumentList(regno);
+    documents![docName] = [verification, url];
+    await _firestore
+        .collection("users")
+        .doc(regno)
+        .update({"documents": documents});
+
+    print("done");
   }
 }
