@@ -88,7 +88,9 @@ class _ViewDocumentsState extends State<ViewDocuments> {
                                     onPressed: () {
                                       nextScreen(
                                         context,
-                                        faculty_homepage(),
+                                        ViewStudents(
+                                          section: data['section'],
+                                        ),
                                       );
                                     },
                                     icon: const Icon(
