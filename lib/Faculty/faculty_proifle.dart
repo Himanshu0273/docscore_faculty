@@ -30,18 +30,13 @@ class _FacultyprofileState extends State<Facultyprofile> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            body: SingleChildScrollView(
-      child: FutureBuilder<Map<String, dynamic>>(
+      body: FutureBuilder<Map<String, dynamic>>(
           future: _facultyData,
           builder: (BuildContext context,
               AsyncSnapshot<Map<String, dynamic>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  child: const CircularProgressIndicator(),
-                ),
+              return const Center(
+                child: CircularProgressIndicator(),
               );
             } else if (snapshot.hasError) {
               return Center(
@@ -49,7 +44,6 @@ class _FacultyprofileState extends State<Facultyprofile> {
               );
             } else {
               Map<String, dynamic> data = snapshot.data!;
-              print(data["sections"].toString());
 
               return SingleChildScrollView(
                 child: Stack(
@@ -242,7 +236,7 @@ class _FacultyprofileState extends State<Facultyprofile> {
               );
             }
           }),
-    )));
+    ));
   }
 }
 
