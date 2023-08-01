@@ -1,15 +1,27 @@
+import 'package:docscore_faculty/Faculty/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class DocumentTile extends StatefulWidget {
-  DocumentTile({super.key, required this.documentName});
+  const DocumentTile({
+    super.key,
+    required this.documentName,
+    required this.docData,
+  });
 
   final String documentName;
+  final Map<String, dynamic> docData;
 
   @override
-  State<DocumentTile> createState() => _DocumentTileState();
+  State<DocumentTile> createState() =>
+      _DocumentTileState(documentName: documentName, docData: docData);
 }
 
 class _DocumentTileState extends State<DocumentTile> {
+  final String documentName;
+  final Map<String, dynamic> docData;
+
+  _DocumentTileState({required this.documentName, required this.docData});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,22 +40,33 @@ class _DocumentTileState extends State<DocumentTile> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                FittedBox(child: Text(widget.documentName, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500,fontSize: 15),),),
+                FittedBox(
+                  child: Text(
+                    widget.documentName,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15),
+                  ),
+                ),
                 Row(
                   children: [
-                    Container(
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.check, color: Colors.green),
-                      ),
-                    ),
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(
-                        Icons.close,
-                        color: Colors.red,
-                      ),
-                    )
+                      icon: const Icon(Icons.check, color: Colors.green),
+                    ),
+                    // int _verification = docData["verification"]
+                    // switch(
+                    //    docData["verification"] as
+                    // ){
+                    //      IconButton(
+                    //         onPressed: () {},
+                    //         icon: const Icon(
+                    //           Icons.close,
+                    //           color: Colors.grey,
+                    //         ),
+                    //       )
+                    // }
                   ],
                 )
               ],
@@ -59,7 +82,7 @@ class _DocumentTileState extends State<DocumentTile> {
                       borderRadius: BorderRadius.circular(15)),
                   child: TextButton(
                     onPressed: () {
-                      
+                      launchInBrowser(Uri.parse(docData["url"]));
                     },
                     child: const Text(
                       "View",

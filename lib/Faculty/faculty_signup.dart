@@ -1,5 +1,6 @@
 // ignore_for_file: unused_field, sort_child_properties_last, unused_import, use_build_context_synchronously
 
+import 'package:docscore_faculty/Faculty/faculty_home.dart';
 import 'package:docscore_faculty/Faculty/faculty_login.dart';
 import 'package:docscore_faculty/resources/constants.dart';
 import 'package:docscore_faculty/resources/constants/colors.dart';
@@ -55,7 +56,7 @@ class _FacultySignupPageState extends State<FacultySignupPage> {
     });
 
     if (res == "Success") {
-      // print(res1);
+      nextScreen(context, faculty_homepage());
       showSnackBar("Signup Success", context);
     } else {
       showSnackBar("Signup Failed", context);
