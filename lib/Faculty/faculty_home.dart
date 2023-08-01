@@ -49,6 +49,7 @@ class _faculty_homepageState extends State<faculty_homepage> {
               } else {
                 Map<String, dynamic> data = snapshot.data!;
                 List<String> sections = data.keys.toList();
+                print(sections);
 
                 return SingleChildScrollView(
                   child: LiquidPullToRefresh(
@@ -140,7 +141,7 @@ class _faculty_homepageState extends State<faculty_homepage> {
                                     crossAxisSpacing: 10,
                                     mainAxisSpacing: 10,
                                   ),
-                                  itemCount: 1,
+                                  itemCount: sections.length,
                                   itemBuilder: (context, index) {
                                     return HomeTile(
                                       sectionName: sections[index],

@@ -99,7 +99,7 @@ class _ViewStudentsState extends State<ViewStudents> {
                           ),
                         ),
                         Text(
-                          "Section: ${data['section']}",
+                          "Section: ${section}",
                           style: GoogleFonts.montserrat(
                               color: const Color(0xFFE9EFFF),
                               fontWeight: FontWeight.w500,

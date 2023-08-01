@@ -6,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class User {
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  FirebaseAuth _auth = FirebaseAuth.instance;
   // FUNCTIONS TO UPDATE OR ADD INTO DATABASE
 
   // add student in user collection with nill documents uploaded
@@ -207,5 +209,19 @@ class User {
     // print(docsData);
 
     return docsData;
+  }
+
+  Future<Map<String, dynamic>> getFacultyData() async {
+    Map<String, dynamic> data = {};
+
+    DocumentSnapshot<Map<String, dynamic>> facultyDataSnapshot =
+        await _firestore.collection("users").doc(_auth.currentUser!.uid).get();
+
+    data["name"] = facultyDataSnapshot["name"];
+    data["sections"] = facultyDataSnapshot["sections"];
+
+    // print(data);
+
+    return data;
   }
 }
