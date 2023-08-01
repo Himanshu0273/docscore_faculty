@@ -28,9 +28,10 @@ class StudentTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              name,
+              regno,
               style: GoogleFonts.montserrat(
-                  fontSize: 20, fontWeight: FontWeight.w700),
+                  fontSize: 20 * MediaQuery.of(context).textScaleFactor,
+                  fontWeight: FontWeight.w700),
             ),
             Text(
               docsUploaded.toString(),

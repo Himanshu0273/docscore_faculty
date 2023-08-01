@@ -131,20 +131,51 @@ class _FacultyprofileState extends State<Facultyprofile> {
                                   ],
                                 ),
                                 const SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 150.0),
-                                      child: Column(
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.15,
+                                  child: Row(
+                                    children: [
+                                      Column(
                                         children: [
-                                          Text(
-                                              "Section:${data["sections"].toString()}"),
-                                          Icon(Icons.mail),
+                                          SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.15,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.25,
+                                          ),
                                         ],
                                       ),
-                                    ),
-                                  ],
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Section:   ${data["sections"].toString()}",
+                                            style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const SizedBox(height: 20),
+                                          Text(
+                                            "E-Mail:   ${data["email"].toString()}",
+                                            style: TextStyle(
+                                                fontSize: 20 *
+                                                    MediaQuery.of(context)
+                                                        .textScaleFactor,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 const SizedBox(height: 170),
                                 Column(

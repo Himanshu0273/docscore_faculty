@@ -115,17 +115,6 @@ class _ViewStudentsState extends State<ViewStudents> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              FittedBox(
-                                child: Text(
-                                  "Name",
-                                  style: GoogleFonts.montserrat(
-                                      color: const Color(0xFFE9EFFF),
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 20 *
-                                          MediaQuery.of(context)
-                                              .textScaleFactor),
-                                ),
-                              ),
                               // const SizedBox(
                               //   width: 10,
                               // ),
