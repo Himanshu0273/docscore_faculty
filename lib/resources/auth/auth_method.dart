@@ -23,31 +23,24 @@ class AuthMethods {
   }
 
   Future addFacultytoSections(
-      String uid, List<String> students, List<String> sections) async {
+      String uid, List<String> students, String section) async {
     String res = "Error";
     try {
       String name = await user_model.User.getFacultyName(uid).then((value) {
         String name = value;
         return name;
       });
-      for (String section in sections) {
-        print(name);
-        print(section);
-        print(uid);
-        print(students);
+      faculty_model.FacultySections facultySec =
+          faculty_model.FacultySections(name: name, students: students);
 
-        faculty_model.FacultySections facultySec =
-            faculty_model.FacultySections(name: name, students: students);
-
-        await firestore
-            .collection("sections")
-            .doc(section)
-            .collection("Faculty advisors")
-            .doc(uid)
-            .set(
-              facultySec.toJson(),
-            );
-      }
+      await firestore
+          .collection("sections")
+          .doc(section)
+          .collection("Faculty advisors")
+          .doc(uid)
+          .set(
+            facultySec.toJson(),
+          );
       res = "Success";
     } catch (e) {
       res = e.toString();
@@ -77,10 +70,10 @@ class AuthMethods {
         List<String> students = [];
         for (var section in sections) {
           students = await user_model.User().getSectionStudentList(section);
+
+          await addFacultytoSections(
+              userCredential.user!.uid, students, section);
         }
-        print("adding");
-        await addFacultytoSections(
-            userCredential.user!.uid, students, sections);
 
         res = "Success";
       }

@@ -74,6 +74,7 @@ class User {
     QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore
         .instance
         .collection("users")
+        .where("role", isEqualTo: "student")
         .where("section", isEqualTo: section)
         .get();
 
@@ -81,7 +82,7 @@ class User {
       studentList.add(doc.id);
     });
 
-    return Future.value(studentList);
+    return studentList;
   }
 
   Future<List<String>> getFacultySectionList(String uid) async {
@@ -103,7 +104,6 @@ class User {
     DocumentSnapshot facultyUsersSnapshot =
         await FirebaseFirestore.instance.collection("users").doc(uid).get();
     for (String section in facultyUsersSnapshot["sections"]) {
-      // print(section);
       DocumentSnapshot sectionsSnapshot = await FirebaseFirestore.instance
           .collection("sections")
           .doc(section)
@@ -118,8 +118,6 @@ class User {
         "strength": facData["Students"].length
       };
     }
-
-    // print(facultyHomePageData);
 
     return facultyHomePageData;
   }

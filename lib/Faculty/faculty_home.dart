@@ -49,7 +49,6 @@ class _faculty_homepageState extends State<faculty_homepage> {
               } else {
                 Map<String, dynamic> data = snapshot.data!;
                 List<String> sections = data.keys.toList();
-                print(sections);
 
                 return SingleChildScrollView(
                   child: LiquidPullToRefresh(

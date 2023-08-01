@@ -38,7 +38,7 @@ class _ViewDocumentsState extends State<ViewDocuments> {
   void initState() {
     super.initState();
     _uploadedDocsData = user_model.User().getDocsData(studentRegno, documents);
-    print(documents);
+    // print(documents);
   }
 
   @override
@@ -58,7 +58,6 @@ class _ViewDocumentsState extends State<ViewDocuments> {
               );
             } else {
               Map<String, dynamic> data = snapshot.data;
-              print(data);
 
               return SafeArea(
                 child: SingleChildScrollView(
@@ -184,7 +183,8 @@ class _ViewDocumentsState extends State<ViewDocuments> {
                               return Column(
                                 children: [
                                   DocumentTile(
-                                    documentName: "10th marksheet",
+                                    documentName: documents[index],
+                                    docData: data[documents[index]],
                                   ),
                                   const SizedBox(height: 10),
                                 ],
