@@ -199,6 +199,9 @@ class User {
         "verification": data[0],
         "url": data[1],
       };
+
+      docsData["name"] = docsSnapshot["name"];
+      docsData["section"] = docsSnapshot["section"];
     }
 
     // print(docsData);

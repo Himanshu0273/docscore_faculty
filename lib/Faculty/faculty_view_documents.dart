@@ -5,6 +5,7 @@ import 'package:docscore_faculty/resources/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:docscore_faculty/models/users.dart' as user_model;
+import 'package:docscore_faculty/Faculty/utils/utils.dart';
 
 class ViewDocuments extends StatefulWidget {
   const ViewDocuments({
@@ -56,6 +57,7 @@ class _ViewDocumentsState extends State<ViewDocuments> {
               );
             } else {
               Map<String, dynamic> data = snapshot.data;
+              print(data);
 
               return SafeArea(
                 child: SingleChildScrollView(
@@ -191,7 +193,8 @@ class _ViewDocumentsState extends State<ViewDocuments> {
                                       ),
                                       trailing: TextButton(
                                         onPressed: () {
-                                          //utils mei ek function h jisme hume ek url pass krna h
+                                          launchInBrowser(Uri.parse(
+                                              data[documents[index]]["url"]));
                                         },
                                         child: const Text(
                                           "View",
