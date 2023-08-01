@@ -40,6 +40,7 @@ dependencies:
   file_picker: ^4.0.0
   open_file: ^3.0.0
   liquid_pull_to_refresh: ^3.0.1
+  url_launcher: ^6.1.12
 
 
 

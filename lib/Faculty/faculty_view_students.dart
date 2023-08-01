@@ -61,8 +61,9 @@ class _ViewStudentsState extends State<ViewStudents> {
                       children: [
                         Container(
                           height: MediaQuery.of(context).size.height,
-                          decoration:
-                              BoxDecoration(gradient: backgroundGradient()),
+                          decoration: BoxDecoration(
+                            gradient: backgroundGradient(),
+                          ),
                           child: Column(
                             children: [
                               FacultyAppBar(

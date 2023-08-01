@@ -1,3 +1,7 @@
+import 'package:docscore_faculty/Faculty/faculty_home.dart';
+import 'package:docscore_faculty/Faculty/faculty_view_students.dart';
+import 'package:docscore_faculty/resources/constants.dart';
+import 'package:docscore_faculty/resources/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:docscore_faculty/models/users.dart' as user_model;
@@ -32,7 +36,7 @@ class _ViewDocumentsState extends State<ViewDocuments> {
   void initState() {
     super.initState();
     _uploadedDocsData = user_model.User().getDocsData(studentRegno, documents);
-    // print(documents);
+    print(documents);
   }
 
   @override
@@ -54,77 +58,172 @@ class _ViewDocumentsState extends State<ViewDocuments> {
               Map<String, dynamic> data = snapshot.data;
 
               return SafeArea(
-                child: Stack(
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topRight,
-                          end: Alignment.bottomLeft,
-                          colors: [
-                            Color(0xFF1F2C45),
-                            Color(0xFF274B93),
-                            Color(0XFF2A519D),
-                          ],
-                        ),
-                      ),
+                child: SingleChildScrollView(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      gradient: backgroundGradient(),
                     ),
-                    Column(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Row(
+                          padding: const EdgeInsets.only(
+                            top: 10,
+                            left: 12,
+                            right: 12,
+                            bottom: 10,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              IconButton(
-                                onPressed: () {
-                                  // Navigator.pop(context);
-                                },
-                                icon: const Icon(
-                                  Icons.arrow_back,
-                                  color: Color(0xffD9D9D9),
-                                  size: 30,
-                                ),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      nextScreen(
+                                        context,
+                                        faculty_homepage(),
+                                      );
+                                    },
+                                    icon: const Icon(
+                                      Icons.arrow_back,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  SizedBox(
+                                    height: 50,
+                                    width: 120,
+                                    child: Image.asset(
+                                      'assets/SRM_1.jpg',
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const Spacer(),
-                              SizedBox(
-                                height: 40,
-                                width: 105,
-                                child: Image.asset(
-                                  'assets/SRM_1.jpg',
-                                  fit: BoxFit.fill,
-                                ),
-                              )
                             ],
                           ),
                         ),
-                        const SizedBox(height: 15),
-                        Text(
-                          "   Name: Debargha Das",
-                          style: GoogleFonts.montserrat(color: Colors.white),
-                        ),
-                        Text(
-                          "   Registration Number: RA2111051010002",
-                          style: GoogleFonts.montserrat(color: Colors.white),
+                        const SizedBox(
+                          height: 20,
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Container(
-                            height: 70,
-                            width: 220,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(13)),
-                            child: Center(
-                                child: Text(
-                              "Documents Uploaded",
-                              style: GoogleFonts.montserrat(fontSize: 17),
-                            )),
+                          padding: const EdgeInsets.only(
+                              left: 10.0, right: 10, top: 5, bottom: 5),
+                          child: FittedBox(
+                            child: Text(
+                              "Registration Number: $studentRegno",
+                              style: GoogleFonts.poppins(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
                           ),
-                        )
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10.0, right: 10, top: 5, bottom: 5),
+                          child: FittedBox(
+                            child: Text(
+                              "Name: ${data['name']}",
+                              style: GoogleFonts.poppins(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10.0, right: 10, top: 5, bottom: 5),
+                          child: FittedBox(
+                            child: Text(
+                              "Section: ${data['section']}",
+                              style: GoogleFonts.poppins(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 50),
+                        Center(
+                          child: FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Text(
+                              "Uploaded Documents:",
+                              style: GoogleFonts.poppins(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: documents.length,
+                            itemBuilder: (context, int index) {
+                              return Column(
+                                children: [
+                                  Container(
+                                    child: ListTile(
+                                      title: Text(
+                                        documents[index],
+                                        style: GoogleFonts.poppins(
+                                          textStyle: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                      trailing: TextButton(
+                                        onPressed: () {
+                                          //utils mei ek function h jisme hume ek url pass krna h
+                                        },
+                                        child: const Text(
+                                          "View",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Center(
+                                    child: TextButton(
+                                      onPressed: () {},
+                                      style: TextButton.styleFrom(
+                                        backgroundColor: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      child: const Text("Submit"),
+                                    ),
+                                  )
+                                ],
+                              );
+                            },
+                          ),
+                        ),
                       ],
-                    )
-                  ],
+                    ),
+                  ),
                 ),
               );
             }

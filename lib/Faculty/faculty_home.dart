@@ -32,8 +32,8 @@ class _faculty_homepageState extends State<faculty_homepage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      body: FutureBuilder<Map<String, dynamic>>(
+      child: Scaffold(
+        body: FutureBuilder<Map<String, dynamic>>(
           future: _facultyHomePageData,
           builder: (BuildContext context,
               AsyncSnapshot<Map<String, dynamic>> snapshot) {
@@ -152,7 +152,9 @@ class _faculty_homepageState extends State<faculty_homepage> {
                 );
               }
             }
-          }),
-    ));
+          },
+        ),
+      ),
+    );
   }
 }
