@@ -14,37 +14,41 @@ class HomeTile extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         nextScreen(
-            context,
-            ViewStudents(
-              section: sectionName,
-            ));
+          context,
+          ViewStudents(
+            section: sectionName,
+          ),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
+          color: const Color(0xFFE9EFFF),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              sectionName,
-              style: GoogleFonts.montserrat(
-                  fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              numberOfStudents,
-              style: GoogleFonts.montserrat(
-                  fontSize: 25, fontWeight: FontWeight.w400),
-            ),
-            Text(
-              "Students",
-              style: GoogleFonts.montserrat(
-                  fontSize: 20, fontWeight: FontWeight.w400),
-            )
-          ],
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                sectionName,
+                style: GoogleFonts.montserrat(
+                    color: const Color(0xFF0D47A1),
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              FittedBox(
+                child: Text(
+                  "Students: $numberOfStudents",
+                  style: GoogleFonts.montserrat(
+                      color: const Color(0xFF0D47A1),
+                      fontSize: 20 * MediaQuery.of(context).textScaleFactor,
+                      fontWeight: FontWeight.w400),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -99,14 +99,6 @@ class _faculty_homepageState extends State<faculty_homepage> {
                                     ),
                                   ),
                                   const SizedBox(width: 15),
-                                  Text(
-                                    'Home',
-                                    style: GoogleFonts.montserrat(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white,
-                                    ),
-                                  ),
                                   const Spacer(),
                                   SizedBox(
                                     height: 40,
@@ -119,8 +111,24 @@ class _faculty_homepageState extends State<faculty_homepage> {
                                 ],
                               ),
                             ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 15.0),
+                              child: Center(
+                                child: FittedBox(
+                                  child: Text(
+                                    "SECTIONS",
+                                    style: TextStyle(
+                                        fontSize: 30 *
+                                            MediaQuery.of(context)
+                                                .textScaleFactor,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ),
 
-                            const Heading(heading: "Sections"),
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.7,
                               child: Padding(

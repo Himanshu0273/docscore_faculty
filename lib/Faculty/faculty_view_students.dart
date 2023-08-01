@@ -41,86 +41,77 @@ class _ViewStudentsState extends State<ViewStudents> {
     return SafeArea(
       child: Scaffold(
         body: FutureBuilder(
-            future: _sectionData,
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
+          future: _sectionData,
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text('Error: ${snapshot.error}'),
                 );
               } else {
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text('Error: ${snapshot.error}'),
-                  );
-                } else {
-                  Map<String, dynamic> data = snapshot.data!;
-                  List<String> regno = data.keys.toList();
+                Map<String, dynamic> data = snapshot.data!;
+                List<String> regno = data.keys.toList();
 
-                  return SingleChildScrollView(
-                    child: Stack(
+                return SingleChildScrollView(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                      gradient: backgroundGradient(),
+                    ),
+                    child: Column(
                       children: [
-                        Container(
-                          height: MediaQuery.of(context).size.height,
-                          decoration: BoxDecoration(
-                            gradient: backgroundGradient(),
-                          ),
-                          child: Column(
-                            children: [
-                              FacultyAppBar(
-                                sectionName: section,
-                              ),
-                              const Heading(heading: "Students"),
-                              const SizedBox(
-                                height: 32,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    "Name",
-                                    style: GoogleFonts.montserrat(
-                                        color: Colors.white, fontSize: 25),
-                                  ),
-                                  Text(
-                                    "Docs Uploaded",
-                                    style: GoogleFonts.montserrat(
-                                        color: Colors.white, fontSize: 25),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              SingleChildScrollView(
-                                child: SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.7,
-                                  child: ListView.builder(
-                                    itemCount: regno.length,
-                                    shrinkWrap: true,
-                                    physics: const BouncingScrollPhysics(),
-                                    itemBuilder: (context, index) {
-                                      return StudentTile(
-                                        name: data[regno[index]]["name"],
-                                        docsUploaded: data[regno[index]]
-                                            ["docsUploaded"],
-                                        docs: data[regno[index]]["documents"],
-                                        regno: regno[index],
-                                      );
-                                    },
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
+                        const SizedBox(
+                          height: 32,
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              "Name",
+                              style: GoogleFonts.montserrat(
+                                  color: Colors.white, fontSize: 25),
+                            ),
+                            Text(
+                              "Docs Uploaded",
+                              style: GoogleFonts.montserrat(
+                                  color: Colors.white, fontSize: 25),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        SingleChildScrollView(
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.7,
+                            child: ListView.builder(
+                              itemCount: regno.length,
+                              shrinkWrap: true,
+                              physics: const BouncingScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return StudentTile(
+                                  name: data[regno[index]]["name"],
+                                  docsUploaded: data[regno[index]]
+                                      ["docsUploaded"],
+                                  docs: data[regno[index]]["documents"],
+                                  regno: regno[index],
+                                );
+                              },
+                            ),
+                          ),
+                        )
                       ],
                     ),
-                  );
-                }
+                  ),
+                );
               }
-            }),
+            }
+          },
+        ),
       ),
     );
   }
