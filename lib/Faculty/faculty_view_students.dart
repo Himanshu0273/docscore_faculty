@@ -1,4 +1,6 @@
+import 'package:docscore_faculty/Faculty/faculty_home.dart';
 import 'package:docscore_faculty/models/sections.dart';
+import 'package:docscore_faculty/resources/constants.dart';
 import 'package:docscore_faculty/resources/constants/colors.dart';
 import 'package:docscore_faculty/widgets/faculty_appbar.dart';
 import 'package:docscore_faculty/widgets/faculty_home_widgets.dart';
@@ -59,28 +61,101 @@ class _ViewStudentsState extends State<ViewStudents> {
                 return SingleChildScrollView(
                   child: Container(
                     height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       gradient: backgroundGradient(),
                     ),
                     child: Column(
                       children: [
-                        const SizedBox(
-                          height: 32,
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  nextScreen(
+                                    context,
+                                    faculty_homepage(),
+                                  );
+                                },
+                                icon: const Icon(
+                                  Icons.arrow_back,
+                                  color: Color(0xFFE9EFFF),
+                                  size: 30,
+                                ),
+                              ),
+                              const SizedBox(width: 15),
+                              const Spacer(),
+                              SizedBox(
+                                height: 40,
+                                width: 105,
+                                child: Image.asset(
+                                  'assets/SRM_1.jpg',
+                                  fit: BoxFit.fill,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "Name",
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.white, fontSize: 25),
-                            ),
-                            Text(
-                              "Docs Uploaded",
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.white, fontSize: 25),
-                            )
-                          ],
+                        Text(
+                          "Section: ${data['section']}",
+                          style: GoogleFonts.montserrat(
+                              color: const Color(0xFFE9EFFF),
+                              fontWeight: FontWeight.w500,
+                              fontSize:
+                                  30 * MediaQuery.of(context).textScaleFactor),
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10.0, bottom: 10, left: 20, right: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              FittedBox(
+                                child: Text(
+                                  "Name",
+                                  style: GoogleFonts.montserrat(
+                                      color: const Color(0xFFE9EFFF),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 20 *
+                                          MediaQuery.of(context)
+                                              .textScaleFactor),
+                                ),
+                              ),
+                              // const SizedBox(
+                              //   width: 10,
+                              // ),
+                              FittedBox(
+                                child: Text(
+                                  "Regn. No.",
+                                  style: GoogleFonts.montserrat(
+                                      color: const Color(0xFFE9EFFF),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 20 *
+                                          MediaQuery.of(context)
+                                              .textScaleFactor),
+                                ),
+                              ),
+                              // const SizedBox(
+                              //   width: 10,
+                              // ),
+                              FittedBox(
+                                child: Text(
+                                  "Docs Uploaded",
+                                  style: GoogleFonts.montserrat(
+                                      color: const Color(0xFFE9EFFF),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 15 *
+                                          MediaQuery.of(context)
+                                              .textScaleFactor),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 12,
