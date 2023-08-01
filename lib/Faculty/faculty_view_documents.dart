@@ -2,6 +2,7 @@ import 'package:docscore_faculty/Faculty/faculty_home.dart';
 import 'package:docscore_faculty/Faculty/faculty_view_students.dart';
 import 'package:docscore_faculty/resources/constants.dart';
 import 'package:docscore_faculty/resources/constants/colors.dart';
+import 'package:docscore_faculty/widgets/faculty_document_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:docscore_faculty/models/users.dart' as user_model;
@@ -182,45 +183,10 @@ class _ViewDocumentsState extends State<ViewDocuments> {
                             itemBuilder: (context, int index) {
                               return Column(
                                 children: [
-                                  Container(
-                                    child: ListTile(
-                                      title: Text(
-                                        documents[index],
-                                        style: GoogleFonts.poppins(
-                                          textStyle: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ),
-                                      trailing: TextButton(
-                                        onPressed: () {
-                                          launchInBrowser(Uri.parse(
-                                              data[documents[index]]["url"]));
-                                        },
-                                        child: const Text(
-                                          "View",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                      ),
-                                    ),
+                                  DocumentTile(
+                                    documentName: "10th marksheet",
                                   ),
                                   const SizedBox(height: 10),
-                                  Center(
-                                    child: TextButton(
-                                      onPressed: () {},
-                                      style: TextButton.styleFrom(
-                                        backgroundColor: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                      ),
-                                      child: const Text("Submit"),
-                                    ),
-                                  )
                                 ],
                               );
                             },
