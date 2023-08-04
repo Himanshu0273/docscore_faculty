@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
               return faculty_homepage();
             }
           }
-          return FacultyLoginScreen();
+          return const FacultyLoginScreen();
         },
       ),
     );
